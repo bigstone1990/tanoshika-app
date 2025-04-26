@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -12,6 +14,77 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        DB::table('users')->insert([
+            [
+                'name' => 'ユーザー1',
+                'kana' => 'ゆーざーいち',
+                'email' => 'user1@test.com',
+                'password' => Hash::make('password'),
+                'authority' => 1,
+            ],
+            [
+                'name' => 'ユーザー2',
+                'kana' => 'ゆーざーに',
+                'email' => 'user2@test.com',
+                'password' => Hash::make('password'),
+                'authority' => 9,
+            ],
+            [
+                'name' => 'ユーザー3',
+                'kana' => 'ゆーざーさん',
+                'email' => 'user3@test.com',
+                'password' => Hash::make('password'),
+                'authority' => 9,
+            ],
+            [
+                'name' => 'ユーザー4',
+                'kana' => 'ゆーざーよん',
+                'email' => 'user4@test.com',
+                'password' => Hash::make('password'),
+                'authority' => 9,
+            ],
+            [
+                'name' => 'ユーザー5',
+                'kana' => 'ゆーざーご',
+                'email' => 'user5@test.com',
+                'password' => Hash::make('password'),
+                'authority' => 9,
+            ],
+            [
+                'name' => 'ユーザー6',
+                'kana' => 'ゆーざーろく',
+                'email' => 'user6@test.com',
+                'password' => Hash::make('password'),
+                'authority' => 9,
+            ],
+            [
+                'name' => 'ユーザー7',
+                'kana' => 'ゆーざーなな',
+                'email' => 'user7@test.com',
+                'password' => Hash::make('password'),
+                'authority' => 9,
+            ],
+            [
+                'name' => 'ユーザー8',
+                'kana' => 'ゆーざーはち',
+                'email' => 'user8@test.com',
+                'password' => Hash::make('password'),
+                'authority' => 9,
+            ],
+            [
+                'name' => 'ユーザー9',
+                'kana' => 'ゆーざーきゅう',
+                'email' => 'user9@test.com',
+                'password' => Hash::make('password'),
+                'authority' => 9,
+            ],
+            [
+                'name' => 'ユーザー10',
+                'kana' => 'ゆーざーじゅう',
+                'email' => 'user10@test.com',
+                'password' => Hash::make('password'),
+                'authority' => 9,
+            ],
+        ]);
     }
 }
