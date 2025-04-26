@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\CustomResetPassword;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable
+class Staff extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -19,11 +20,11 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'user_id',
         'name',
         'kana',
         'email',
         'password',
-        'authority',
     ];
 
     /**
