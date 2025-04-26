@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\User\Auth;
+namespace App\Http\Controllers\Staff\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Staff;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -20,7 +20,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('User/Auth/Register');
+        return Inertia::render('Staff/Auth/Register');
     }
 
     /**
@@ -32,11 +32,11 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
+            'email' => 'required|string|lowercase|email|max:255|unique:'.Staff::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
+        $user = Staff::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -44,8 +44,8 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        Auth::guard('users')->login($user);
+        Auth::guard('staff')->login($user);
 
-        return redirect(route('user.dashboard', absolute: false));
+        return redirect(route('staff.dashboard', absolute: false));
     }
 }

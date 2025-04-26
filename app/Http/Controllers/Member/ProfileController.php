@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserProfileUpdateRequest;
+use App\Http\Requests\MemberProfileUpdateRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
-        return Inertia::render('User/Profile/Edit', [
+        return Inertia::render('Member/Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
         ]);
@@ -28,7 +28,7 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(UserProfileUpdateRequest $request): RedirectResponse
+    public function update(MemberProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());
 
@@ -38,7 +38,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('user.profile.edit');
+        return Redirect::route('member.profile.edit');
     }
 
     /**
@@ -52,13 +52,13 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
-        Auth::guard('users')->logout();
+        Auth::guard('members')->logout();
 
         $user->delete();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to(route('user.login'));
+        return Redirect::to(route('member.login'));
     }
 }
