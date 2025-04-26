@@ -88,6 +88,10 @@ return [
 
     'table' => env('SESSION_TABLE', 'sessions'),
 
+    'table_staff' => env('SESSION_TABLE_STAFF', 'staff_sessions'),
+
+    'table_member' => env('SESSION_TABLE_MEMBER', 'member_sessions'),
+
     /*
     |--------------------------------------------------------------------------
     | Session Cache Store
@@ -130,6 +134,16 @@ return [
     'cookie' => env(
         'SESSION_COOKIE',
         Str::slug(env('APP_NAME', 'laravel'), '_').'_session'
+    ),
+
+    'cookie_staff' => env(
+        'SESSION_COOKIE_STAFF',
+        Str::slug(env('APP_NAME', 'laravel'), '_').'_session_staff'
+    ),
+
+    'cookie_member' => env(
+        'SESSION_COOKIE_MEMBER',
+        Str::slug(env('APP_NAME', 'laravel'), '_').'_session_member'
     ),
 
     /*

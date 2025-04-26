@@ -40,6 +40,18 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'users' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+        'staff' => [
+            'driver' => 'session',
+            'provider' => 'staff',
+        ],
+        'members' => [
+            'driver' => 'session',
+            'provider' => 'members',
+        ],
     ],
 
     /*
@@ -63,6 +75,14 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
+        ],
+        'staff' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL_STAFF', App\Models\Staff::class),
+        ],
+        'members' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL_MEMBER', App\Models\Member::class),
         ],
 
         // 'users' => [
@@ -94,6 +114,18 @@ return [
         'users' => [
             'provider' => 'users',
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'staff' => [
+            'provider' => 'staff',
+            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE_STAFF', 'staff_password_reset_tokens'),
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'members' => [
+            'provider' => 'members',
+            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE_MEMBER', 'member_password_reset_tokens'),
             'expire' => 60,
             'throttle' => 60,
         ],
