@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Staff;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StaffProfileUpdateRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class StaffProfileUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,14 @@ class StaffProfileUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'email' => [
+                'required',
+                'string',
+                'lowercase',
+                'email',
+                'max:255',
+                Rule::unique(Staff::class)->ignore($this->user()->id),
+            ],
         ];
     }
 }

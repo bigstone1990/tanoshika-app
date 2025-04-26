@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Member;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class MemberProfileUpdateRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class MemberProfileUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,14 @@ class MemberProfileUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'email' => [
+                'required',
+                'string',
+                'lowercase',
+                'email',
+                'max:255',
+                Rule::unique(Member::class)->ignore($this->user()->id),
+            ],
         ];
     }
 }
