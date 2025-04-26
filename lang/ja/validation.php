@@ -259,6 +259,8 @@ return [
         'updated_at' => '更新日',
         'username' => 'ユーザー名',
         'year' => '年',
+        'authority' => '権限',
+        'affiliation' => '所属事業所',
     ],
 
 ];
