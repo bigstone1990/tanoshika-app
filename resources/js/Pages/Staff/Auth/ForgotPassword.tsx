@@ -14,14 +14,14 @@ export default function ForgotPassword({ status }: { status?: string }) {
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route('user.password.email'));
+        post(route('staff.password.email'));
     };
 
     return (
         <GuestLayout>
             <Head title="パスワードを忘れましたか？" />
 
-            <h2>User</h2>
+            <h2>Staff</h2>
 
             <div className="mb-4 text-sm text-gray-600">
                 パスワードを忘れましたか？<br />

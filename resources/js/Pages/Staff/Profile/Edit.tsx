@@ -1,4 +1,4 @@
-import AuthenticatedLayout from '@/Layouts/UserAuthenticatedLayout';
+import AuthenticatedLayout from '@/Layouts/StaffAuthenticatedLayout';
 import { PageProps } from '@/types';
 import { Head } from '@inertiajs/react';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm';

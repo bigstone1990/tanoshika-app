@@ -23,7 +23,7 @@ export default function ResetPassword({
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route('user.password.store'), {
+        post(route('member.password.store'), {
             onFinish: () => reset('password', 'password_confirmation'),
         });
     };
@@ -32,7 +32,7 @@ export default function ResetPassword({
         <GuestLayout>
             <Head title="パスワードリセット" />
 
-            <h2>User</h2>
+            <h2>Member</h2>
 
             <form onSubmit={submit}>
                 <div>

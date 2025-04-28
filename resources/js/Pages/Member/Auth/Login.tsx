@@ -23,16 +23,16 @@ export default function Login({
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route('user.login'), {
+        post(route('member.login'), {
             onFinish: () => reset('password'),
         });
     };
 
     return (
         <GuestLayout>
-            <Head title="事業所用ログイン" />
+            <Head title="メンバー用ログイン" />
 
-            <h2>User</h2>
+            <h2>Member</h2>
 
             {status && (
                 <div className="mb-4 text-sm font-medium text-green-600">
@@ -95,7 +95,7 @@ export default function Login({
                 <div className="mt-4 flex items-center justify-end">
                     {canResetPassword && (
                         <Link
-                            href={route('user.password.request')}
+                            href={route('member.password.request')}
                             className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                         >
                             パスワードを忘れましたか？
