@@ -1,17 +1,17 @@
 <?php
 
-use App\Http\Controllers\User\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\User\Auth\ConfirmablePasswordController;
-use App\Http\Controllers\User\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\User\Auth\EmailVerificationPromptController;
-use App\Http\Controllers\User\Auth\NewPasswordController;
-use App\Http\Controllers\User\Auth\PasswordController;
-use App\Http\Controllers\User\Auth\PasswordResetLinkController;
-use App\Http\Controllers\User\Auth\RegisteredUserController;
-use App\Http\Controllers\User\Auth\VerifyEmailController;
+use App\Http\Controllers\Staff\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Staff\Auth\ConfirmablePasswordController;
+use App\Http\Controllers\Staff\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Staff\Auth\EmailVerificationPromptController;
+use App\Http\Controllers\Staff\Auth\NewPasswordController;
+use App\Http\Controllers\Staff\Auth\PasswordController;
+use App\Http\Controllers\Staff\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Staff\Auth\RegisteredUserController;
+use App\Http\Controllers\Staff\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('user')->name('user.')->middleware('guest:users')->group(function () {
+Route::middleware('guest:staff')->group(function () {
     // Route::get('register', [RegisteredUserController::class, 'create'])
     //     ->name('register');
 
@@ -35,7 +35,7 @@ Route::prefix('user')->name('user.')->middleware('guest:users')->group(function 
         ->name('password.store');
 });
 
-Route::prefix('user')->name('user.')->middleware('auth:users')->group(function () {
+Route::middleware('auth:staff')->group(function () {
     // Route::get('verify-email', EmailVerificationPromptController::class)
     //     ->name('verification.notice');
 

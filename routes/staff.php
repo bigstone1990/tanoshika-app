@@ -1,26 +1,22 @@
 <?php
 
-use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\Staff\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::prefix('user')->name('user.')->middleware('auth:users')->group(function () {
-    Route::get('/', function () {
-        return redirect()->route('user.dashboard');
-    })->name('top');
-});
+Route::get('/', function () {
+    return redirect()->route('staff.dashboard');
+})->middleware('auth:staff')->name('top');
 
-Route::prefix('user')->name('user.')->middleware(['auth:users', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('User/Dashboard');
-    })->name('dashboard');
-});
+Route::get('/dashboard', function () {
+    return Inertia::render('Staff/Dashboard');
+})->middleware(['auth:staff', 'verified'])->name('dashboard');
 
-Route::prefix('user')->name('user.')->middleware('auth:users')->group(function () {
+Route::middleware('auth:staff')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__.'/staffAuth.php';
