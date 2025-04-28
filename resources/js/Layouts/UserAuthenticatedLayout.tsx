@@ -21,17 +21,17 @@ export default function Authenticated({
                     <div className="flex h-16 justify-between">
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
-                                <Link href="/">
+                                <Link href={route('user.dashboard')}>
                                     <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
                                 </Link>
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink
-                                    href={route('dashboard')}
-                                    active={route().current('dashboard')}
+                                    href={route('user.dashboard')}
+                                    active={route().current('user.dashboard')}
                                 >
-                                    Dashboard
+                                    ダッシュボード
                                 </NavLink>
                             </div>
                         </div>
@@ -65,16 +65,16 @@ export default function Authenticated({
 
                                     <Dropdown.Content>
                                         <Dropdown.Link
-                                            href={route('profile.edit')}
+                                            href={route('user.profile.edit')}
                                         >
-                                            Profile
+                                            ユーザー設定
                                         </Dropdown.Link>
                                         <Dropdown.Link
-                                            href={route('logout')}
+                                            href={route('user.logout')}
                                             method="post"
                                             as="button"
                                         >
-                                            Log Out
+                                            ログアウト
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -132,10 +132,10 @@ export default function Authenticated({
                 >
                     <div className="space-y-1 pb-3 pt-2">
                         <ResponsiveNavLink
-                            href={route('dashboard')}
-                            active={route().current('dashboard')}
+                            href={route('user.dashboard')}
+                            active={route().current('user.dashboard')}
                         >
-                            Dashboard
+                            ダッシュボード
                         </ResponsiveNavLink>
                     </div>
 
@@ -150,15 +150,15 @@ export default function Authenticated({
                         </div>
 
                         <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>
-                                Profile
+                            <ResponsiveNavLink href={route('user.profile.edit')}>
+                                ユーザー設定
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
                                 method="post"
-                                href={route('logout')}
+                                href={route('user.logout')}
                                 as="button"
                             >
-                                Log Out
+                                ログアウト
                             </ResponsiveNavLink>
                         </div>
                     </div>

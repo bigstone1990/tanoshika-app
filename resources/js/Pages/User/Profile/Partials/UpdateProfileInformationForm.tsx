@@ -19,47 +19,42 @@ export default function UpdateProfileInformation({
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
-            name: user.name,
             email: user.email,
         });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        patch(route('profile.update'));
+        patch(route('user.profile.update'));
     };
 
     return (
         <section className={className}>
             <header>
                 <h2 className="text-lg font-medium text-gray-900">
-                    Profile Information
+                    ユーザー情報
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-600">
-                    Update your account's profile information and email address.
+                    メールアドレスを変更できます。
                 </p>
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <label className="block text-sm font-medium text-gray-700">名前</label>
 
-                    <TextInput
-                        id="name"
-                        className="mt-1 block w-full"
-                        value={data.name}
-                        onChange={(e) => setData('name', e.target.value)}
-                        required
-                        isFocused
-                        autoComplete="name"
-                    />
-
-                    <InputError className="mt-2" message={errors.name} />
+                    <p className="mt-1 block w-full ">{user.name}</p>
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                    <label className="block text-sm font-medium text-gray-700">かな</label>
+
+                    <p className="mt-1 block w-full ">{user.kana}</p>
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="email" value="メールアドレス" />
 
                     <TextInput
                         id="email"
@@ -68,6 +63,7 @@ export default function UpdateProfileInformation({
                         value={data.email}
                         onChange={(e) => setData('email', e.target.value)}
                         required
+                        isFocused
                         autoComplete="username"
                     />
 
@@ -79,7 +75,7 @@ export default function UpdateProfileInformation({
                         <p className="mt-2 text-sm text-gray-800">
                             Your email address is unverified.
                             <Link
-                                href={route('verification.send')}
+                                href={route('user.verification.send')}
                                 method="post"
                                 as="button"
                                 className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -98,7 +94,7 @@ export default function UpdateProfileInformation({
                 )}
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <PrimaryButton disabled={processing}>保存</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
@@ -108,7 +104,7 @@ export default function UpdateProfileInformation({
                         leaveTo="opacity-0"
                     >
                         <p className="text-sm text-gray-600">
-                            Saved.
+                            保存しました
                         </p>
                     </Transition>
                 </div>

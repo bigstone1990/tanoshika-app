@@ -6,17 +6,17 @@ export default function Dashboard() {
         <AuthenticatedLayout
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    ダッシュボード
+                    Sample
                 </h2>
             }
         >
-            <Head title="ダッシュボード" />
+            <Head title="Sample" />
 
             <div className="PageContainer">
                 <div className="PageWrapper">
                     <div className="Page">
                         <div className="PageContent">
-                            You're logged in!
+                            Sample Page!
                         </div>
                     </div>
                 </div>

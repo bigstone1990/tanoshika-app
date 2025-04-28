@@ -1,4 +1,5 @@
 import InputError from '@/Components/InputError';
+import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
@@ -13,17 +14,18 @@ export default function ForgotPassword({ status }: { status?: string }) {
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route('password.email'));
+        post(route('user.password.email'));
     };
 
     return (
         <GuestLayout>
-            <Head title="Forgot Password" />
+            <Head title="パスワードを忘れましたか？" />
+
+            <h2>User</h2>
 
             <div className="mb-4 text-sm text-gray-600">
-                Forgot your password? No problem. Just let us know your email
-                address and we will email you a password reset link that will
-                allow you to choose a new one.
+                パスワードを忘れましたか？<br />
+                登録しているメールアドレスにパスワードリセット用リンクを送ることができます。
             </div>
 
             {status && (
@@ -33,6 +35,8 @@ export default function ForgotPassword({ status }: { status?: string }) {
             )}
 
             <form onSubmit={submit}>
+                <InputLabel htmlFor="email" value="メールアドレス" />
+
                 <TextInput
                     id="email"
                     type="email"
@@ -47,7 +51,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
 
                 <div className="mt-4 flex items-center justify-end">
                     <PrimaryButton className="ms-4" disabled={processing}>
-                        Email Password Reset Link
+                        パスワードリセットメール送信
                     </PrimaryButton>
                 </div>
             </form>

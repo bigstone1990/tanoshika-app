@@ -23,14 +23,16 @@ export default function Login({
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route('login'), {
+        post(route('user.login'), {
             onFinish: () => reset('password'),
         });
     };
 
     return (
         <GuestLayout>
-            <Head title="Log in" />
+            <Head title="事業所用ログイン" />
+
+            <h2>User</h2>
 
             {status && (
                 <div className="mb-4 text-sm font-medium text-green-600">
@@ -40,7 +42,7 @@ export default function Login({
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel htmlFor="email" value="メールアドレス" />
 
                     <TextInput
                         id="email"
@@ -57,7 +59,7 @@ export default function Login({
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <InputLabel htmlFor="password" value="パスワード" />
 
                     <TextInput
                         id="password"
@@ -93,15 +95,15 @@ export default function Login({
                 <div className="mt-4 flex items-center justify-end">
                     {canResetPassword && (
                         <Link
-                            href={route('password.request')}
+                            href={route('user.password.request')}
                             className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                         >
-                            Forgot your password?
+                            パスワードを忘れましたか？
                         </Link>
                     )}
 
                     <PrimaryButton className="ms-4" disabled={processing}>
-                        Log in
+                        ログイン
                     </PrimaryButton>
                 </div>
             </form>
