@@ -41,10 +41,16 @@ class HandleInertiaRequests extends Middleware
             $guard = 'users';
         }
 
+        $permissions = [];
+        if (Auth::guard('users')->check()) {
+            $permissions['adminUser'] = $request->user() ? $request->user()->can('adminUser') : false;
+        }
+
         return [
             ...parent::share($request),
             'auth' => [
                 'user' => Auth::guard($guard)->user(),
+                'permissions' => $permissions,
             ],
         ];
     }
