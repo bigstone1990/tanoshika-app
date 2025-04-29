@@ -33,6 +33,12 @@ export default function Authenticated({
                                 >
                                     ダッシュボード
                                 </NavLink>
+                                <NavLink
+                                    href={route('user.users.index')}
+                                    active={route().current('user.users.index')}
+                                >
+                                    事業所管理
+                                </NavLink>
                             </div>
                         </div>
 
@@ -136,6 +142,12 @@ export default function Authenticated({
                             active={route().current('user.dashboard')}
                         >
                             ダッシュボード
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route('user.users.index')}
+                            active={route().current('user.users.index')}
+                        >
+                            事業所管理
                         </ResponsiveNavLink>
                     </div>
 
