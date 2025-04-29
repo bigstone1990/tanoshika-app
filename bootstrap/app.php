@@ -63,7 +63,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->respond(function (Response $response) {
             if ($response->getStatusCode() === 419) {
-                return Inertia::render('ForRedirect', [
+                return Inertia::render('Redirect', [
                     'redirectTo' => url()->previous(),
                 ]);
             }
