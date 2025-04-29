@@ -21,8 +21,6 @@ export default function ForgotPassword({ status }: { status?: string }) {
         <GuestLayout>
             <Head title="パスワードを忘れましたか？" />
 
-            <h2>Staff</h2>
-
             <div className="mb-4 text-sm text-gray-600">
                 パスワードを忘れましたか？<br />
                 登録しているメールアドレスにパスワードリセット用リンクを送ることができます。

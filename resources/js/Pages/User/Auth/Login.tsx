@@ -32,8 +32,6 @@ export default function Login({
         <GuestLayout>
             <Head title="事業所用ログイン" />
 
-            <h2>User</h2>
-
             {status && (
                 <div className="mb-4 text-sm font-medium text-green-600">
                     {status}

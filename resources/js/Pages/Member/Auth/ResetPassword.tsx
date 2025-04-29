@@ -32,8 +32,6 @@ export default function ResetPassword({
         <GuestLayout>
             <Head title="パスワードリセット" />
 
-            <h2>Member</h2>
-
             <form onSubmit={submit}>
                 <div>
                     <InputLabel htmlFor="email" value="メールアドレス" />
