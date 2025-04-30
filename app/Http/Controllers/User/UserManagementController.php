@@ -81,9 +81,17 @@ class UserManagementController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        //
+        return Inertia::render('User/User/Show', [
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'kana' => $user->kana,
+                'email' => $user->email,
+                'authority' => $user->authority,
+            ]
+        ]);
     }
 
     /**
