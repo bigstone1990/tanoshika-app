@@ -32,12 +32,14 @@ export default function FlashMessage({flash}: FlashMessageProps) {
   }, []);
 
   useEffect(() => {
-    if (flash.status === 'success') {
-      toastr.success(flash.message);
-    }
-    else if (flash.status === 'error') {
-      toastr.error(flash.message);
-    }
+    requestAnimationFrame(() => {
+      if (flash.status === 'success') {
+        toastr.success(flash.message);
+      }
+      else if (flash.status === 'error') {
+        toastr.error(flash.message);
+      }
+    });
   }, [flash.status, flash.message]);
 
   return null;
