@@ -8,6 +8,10 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Http\Requests\StoreUserRequest;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use App\Jobs\SendUserCreatedMail;
 
 class UserManagementController extends Controller
 {
@@ -30,15 +34,48 @@ class UserManagementController extends Controller
      */
     public function create()
     {
-        //
+        $loginUser = User::findOrFail(Auth::guard('users')->id());
+
+        if (!$loginUser->can('adminUser')) {
+            return to_route('user.users.index')->with([
+                'message' => 'このアカウントではアクセスできません',
+                'status' => 'error',
+            ]);
+        }
+
+        return Inertia::render('User/User/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        $loginUser = User::findOrFail(Auth::guard('users')->id());
+
+        if (!$loginUser->can('adminUser')) {
+            return to_route('user.users.index')->with([
+                'message' => 'このアカウントではアクセスできません',
+                'status' => 'error',
+            ]);
+        }
+
+        $password = Str::random(8);
+
+        $user = User::create([
+            'name' => $request->name,
+            'kana' => $request->kana,
+            'email' => $request->email,
+            'password' => Hash::make($password),
+            'authority' => intval($request->authority),
+        ]);
+
+        SendUserCreatedMail::dispatch($user, $password);
+
+        return to_route('user.users.index')->with([
+            'message' => '登録しました',
+            'status' => 'success',
+        ]);
     }
 
     /**

@@ -2,12 +2,17 @@ import AuthenticatedLayout from '@/Layouts/UserAuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import styled from 'styled-components'
 import { Breakpoints } from '@/common';
+import FlashMessage from '@/Components/FlashMessage';
 
 type IndexProps = {
   auth: {
     permissions: {
       adminUser: boolean;
     };
+  };
+  flash: {
+    status: string;
+    message: string;
   };
   users: {
     id: number;
@@ -81,7 +86,7 @@ const StyledUserTableContainer = styled.div`
   }
 `;
 
-export default function Index({auth, users}: IndexProps) {
+export default function Index({auth, flash, users}: IndexProps) {
   return (
     <AuthenticatedLayout
       header={
@@ -92,6 +97,7 @@ export default function Index({auth, users}: IndexProps) {
     >
       <Head title="事業所管理" />
 
+      <FlashMessage flash={flash} />
       <div className="PageContainer">
         <div className="PageWrapper">
           <div className="Page">
@@ -99,7 +105,7 @@ export default function Index({auth, users}: IndexProps) {
               <section className="text-gray-600">
                 <div className="container mx-auto">
                   <div className="w-full mx-auto overflow-auto">
-                    <div className={`flex gap-4 justify-end mb-4 w-full ${auth.permissions.adminUser ? '' : 'mb-14'}`}>
+                    <div className={`flex gap-4 justify-end w-full ${auth.permissions.adminUser ? 'mb-4' : 'mb-14'}`}>
                       {auth.permissions.adminUser ? <Link as="button" href={route('user.users.create')} className="text-white bg-indigo-500 border-0 py-2 px-8 hover:bg-indigo-600 rounded">新規作成</Link> : <></>}
                     </div>
                     <StyledUserTableContainer>
