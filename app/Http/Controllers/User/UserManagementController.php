@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Jobs\SendUserCreatedMail;
@@ -97,17 +98,68 @@ class UserManagementController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        $loginUser = User::findOrFail(Auth::guard('users')->id());
+
+        if (!$loginUser->can('adminUser')) {
+            return to_route('user.users.show', ['user' => $user->id])->with([
+                'message' => 'このアカウントではアクセスできません',
+                'status' => 'error',
+            ]);
+        }
+
+        $isSelf = false;
+
+        if ($user->id == $loginUser->id) {
+            $isSelf = true;
+        }
+
+        return Inertia::render('User/User/Edit', [
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'kana' => $user->kana,
+                'email' => $user->email,
+                'authority' => $user->authority,
+                'isSelf' => $isSelf,
+            ]
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $loginUser = User::findOrFail(Auth::guard('users')->id());
+
+        if (!$loginUser->can('adminUser')) {
+            return to_route('user.users.show', ['user' => $user->id])->with([
+                'message' => 'このアカウントではアクセスできません',
+                'status' => 'error',
+            ]);
+        }
+
+        if ($user->id == $loginUser->id) {
+            if ($user->authority !== intval($request->authority)) {
+                return to_route('user.users.show', ['user' => $user->id])->with([
+                    'message' => '不正な操作がありました',
+                    'status' => 'error',
+                ]);
+            }
+        }
+
+        $user->name = $request->name;
+        $user->kana = $request->kana;
+        $user->authority = intval($request->authority);
+
+        $user->save();
+
+        return to_route('user.users.show', ['user' => $user->id])->with([
+            'message' => '更新しました',
+            'status' => 'success',
+        ]);
     }
 
     /**
