@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\User\UserManagementController;
+use App\Http\Controllers\User\StaffManagementController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,10 @@ Route::prefix('user')->name('user.')->middleware(['auth:users', 'verified'])->gr
 
 Route::prefix('user')->name('user.')->middleware('auth:users')->group(function () {
     Route::resource('users', UserManagementController::class);
+});
+
+Route::prefix('user')->name('user.')->middleware('auth:users')->group(function () {
+    Route::resource('staff', StaffManagementController::class);
 });
 
 Route::prefix('user')->name('user.')->middleware('auth:users')->group(function () {
