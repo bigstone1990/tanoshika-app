@@ -55,7 +55,9 @@ export default function Create() {
                                             <form onSubmit={submit}>
                                                 <div className="p-2 w-full">
                                                     <div className="relative">
-                                                        <InputLabel htmlFor="name" value="名前" className="leading-7 text-sm text-gray-600" />
+                                                        <InputLabel htmlFor="name" className="leading-7 text-sm text-gray-600">
+                                                            名前 <span className="text-red-600">*必須項目</span>
+                                                        </InputLabel>
 
                                                         <TextInput
                                                             id="name"
@@ -74,7 +76,9 @@ export default function Create() {
 
                                                 <div className="p-2 w-full">
                                                     <div className="relative">
-                                                        <InputLabel htmlFor="kana" value="かな" className="leading-7 text-sm text-gray-600" />
+                                                        <InputLabel htmlFor="kana" className="leading-7 text-sm text-gray-600">
+                                                            かな <span className="text-red-600">*必須項目</span>
+                                                        </InputLabel>
 
                                                         <TextInput
                                                             id="kana"
@@ -92,7 +96,9 @@ export default function Create() {
 
                                                 <div className="p-2 w-full">
                                                     <div className="relative">
-                                                        <InputLabel htmlFor="email" value="メールアドレス" className="leading-7 text-sm text-gray-600" />
+                                                        <InputLabel htmlFor="email" className="leading-7 text-sm text-gray-600">
+                                                            メールアドレス <span className="text-red-600">*必須項目</span>
+                                                        </InputLabel>
 
                                                         <TextInput
                                                             id="email"
@@ -111,7 +117,7 @@ export default function Create() {
 
                                                 <div className="p-2 w-full">
                                                     <div className="relative">
-                                                        <p className="block text-sm font-medium text-gray-700 leading-7">権限</p>
+                                                        <p className="block text-sm font-medium text-gray-700 leading-7">権限 <span className="text-red-600">*必須項目</span></p>
                                                         <div className="flex gap-4">
                                                             <StyledUserAuthorityContainer className={data.authority === '1' ? 'IsChecked' : ''}>
                                                                 <div className="flex items-center">

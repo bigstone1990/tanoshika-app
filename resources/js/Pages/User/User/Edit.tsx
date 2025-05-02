@@ -85,7 +85,9 @@ export default function Edit({user}: EditProps) {
                                             <form onSubmit={submit}>
                                                 <div className="p-2 w-full">
                                                     <div className="relative">
-                                                        <InputLabel htmlFor="name" value="名前" className="leading-7 text-sm text-gray-600" />
+                                                        <InputLabel htmlFor="name" className="leading-7 text-sm text-gray-600">
+                                                            名前 <span className="text-red-600">*必須項目</span>
+                                                        </InputLabel>
 
                                                         <TextInput
                                                             id="name"
@@ -104,7 +106,9 @@ export default function Edit({user}: EditProps) {
 
                                                 <div className="p-2 w-full">
                                                     <div className="relative">
-                                                        <InputLabel htmlFor="kana" value="かな" className="leading-7 text-sm text-gray-600" />
+                                                        <InputLabel htmlFor="kana" className="leading-7 text-sm text-gray-600">
+                                                            かな <span className="text-red-600">*必須項目</span>
+                                                        </InputLabel>
 
                                                         <TextInput
                                                             id="kana"
@@ -123,7 +127,7 @@ export default function Edit({user}: EditProps) {
                                                 <div className="p-2 w-full">
                                                     <div className="relative">
                                                         <div className="relative">
-                                                            <p className="block text-sm font-medium text-gray-700 leading-7">メールアドレス</p>
+                                                            <p className="block text-sm font-medium text-gray-700 leading-7">メールアドレス <span className="text-red-600">*変更不可</span></p>
 
                                                             <p className="rounded-md border-gray-300 shadow-sm mt-1 block w-full bg-gray-100 bg-opacity-50 border text-base text-gray-700 py-1 px-3 leading-8">{user.email}</p>
                                                         </div>
@@ -133,7 +137,7 @@ export default function Edit({user}: EditProps) {
                                                 {!user.isSelf ? (
                                                     <div className="p-2 w-full">
                                                         <div className="relative">
-                                                            <p className="block text-sm font-medium text-gray-700 leading-7">権限</p>
+                                                            <p className="block text-sm font-medium text-gray-700 leading-7">権限 <span className="text-red-600">*必須項目</span></p>
                                                             <div className="flex gap-4">
                                                                 <StyledUserAuthorityContainer className={data.authority === '1' ? 'IsChecked' : ''}>
                                                                     <div className="flex items-center">
@@ -169,7 +173,7 @@ export default function Edit({user}: EditProps) {
                                                     <div className="p-2 w-full">
                                                         <div className="relative">
                                                             <div className="relative">
-                                                                <p className="block text-sm font-medium text-gray-700 leading-7">権限</p>
+                                                                <p className="block text-sm font-medium text-gray-700 leading-7">権限 <span className="text-red-600">*変更不可</span></p>
 
                                                                 <p className="rounded-md border-gray-300 shadow-sm mt-1 block w-full bg-gray-100 bg-opacity-50 border text-base text-gray-700 py-1 px-3 leading-8">{user.authority === 1 ? '管理者' : user.authority === 9 ? '一般' : 'その他'}</p>
                                                             </div>
