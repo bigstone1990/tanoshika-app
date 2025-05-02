@@ -21,7 +21,7 @@ const StyledUserAuthorityContainer = styled.div`
 `;
 
 export default function Create() {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, errors } = useForm({
         name: '',
         kana: '',
         email: '',
@@ -29,10 +29,10 @@ export default function Create() {
     });
 
     const submit: FormEventHandler = (e) => {
-            e.preventDefault();
-    
-            post(route('user.users.store'));
-        };
+        e.preventDefault();
+
+        post(route('user.users.store'));
+    };
 
     return (
         <AuthenticatedLayout

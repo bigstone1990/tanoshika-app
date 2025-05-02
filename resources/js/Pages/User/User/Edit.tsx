@@ -35,7 +35,7 @@ type EditProps = {
 export default function Edit({user}: EditProps) {
     const [confirmingDeletion, setConfirmingDeletion] = useState(false);
 
-    const { data, setData, put, delete: destroy, processing, errors, reset } = useForm({
+    const { data, setData, put, delete: destroy, errors } = useForm({
         name: user.name,
         kana: user.kana,
         authority: String(user.authority),
