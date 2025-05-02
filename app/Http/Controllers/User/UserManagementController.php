@@ -8,6 +8,8 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Staff;
+use App\Models\Member;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Str;
@@ -181,6 +183,24 @@ class UserManagementController extends Controller
                 'message' => '不正な操作がありました',
                 'status' => 'error',
             ]);
+        }
+
+        $staff = Staff::where('user_id', $user->id)->get();
+
+        if (!$staff->isEmpty()) {
+            foreach ($staff as $item) {
+                $item->user_id = null;
+                $item->save();
+            }
+        }
+
+        $members = Member::where('user_id', $user->id)->get();
+
+        if (!$members->isEmpty()) {
+            foreach ($members as $item) {
+                $item->user_id = null;
+                $item->save();
+            }
         }
 
         $user->delete();
