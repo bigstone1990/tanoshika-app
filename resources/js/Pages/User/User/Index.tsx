@@ -23,7 +23,7 @@ type IndexProps = {
 }
 
 const StyledUserTableContainer = styled.div`
-  max-width: calc(6rem + 10rem + 15rem + 6rem + 1rem);
+  max-width: calc(6rem + 10rem + 15rem + 6rem + 1rem + 1px);
   max-height: 410px;
   overflow-x: auto;
   overflow-y: auto;
@@ -37,34 +37,36 @@ const StyledUserTableContainer = styled.div`
   table {
     border-collapse: separate;
     border-spacing: 0;
-
     thead {
       tr {
         th {
           overflow-wrap: break-word;
-          position: relative;
+        }
 
-          &:first-of-type::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-right: 1px solid white;  
-          }
+        &:first-of-type {
+          th {
+            &::before {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              border-right: 1px solid white;
+            }
 
-          &:first-of-type {
-            position: sticky;
-            top: 0;
-            left: 0;
-            z-index: 3;
-          }
+            &:first-of-type {
+              position: sticky;
+              top: 0;
+              left: 0;
+              z-index: 3;
+            }
 
-          &:not(:first-of-type) {
-            position: sticky;
-            top: 0;
-            z-index: 2;
+            &:not(:first-of-type) {
+              position: sticky;
+              top: 0;
+              z-index: 2;
+            }
           }
         }
       }

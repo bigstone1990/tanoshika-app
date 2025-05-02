@@ -19,7 +19,7 @@ type IndexProps = {
 }
 
 const StyledStaffTableContainer = styled.div`
-  max-width: calc(6rem + 10rem + 15rem + 10rem + 16px + 1px);
+  max-width: calc(6rem + 10rem + 15rem + 10rem + 1rem + 1px);
   max-height: 410px;
   overflow-x: auto;
   overflow-y: auto;
