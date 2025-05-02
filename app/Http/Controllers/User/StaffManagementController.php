@@ -76,9 +76,16 @@ class StaffManagementController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Staff $staff)
     {
-        //
+        $getStaff = Staff::leftjoin('users', 'users.id', '=', 'staff.user_id')
+        ->where('staff.id', $staff->id)
+        ->select('staff.id', 'staff.name', 'staff.kana', 'staff.email', 'staff.user_id', 'users.name as user_name')
+        ->first();
+
+        return Inertia::render('User/Staff/Show', [
+            'staff' => $getStaff,
+        ]);
     }
 
     /**
