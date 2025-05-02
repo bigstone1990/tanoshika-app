@@ -165,8 +165,29 @@ class UserManagementController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $loginUser = User::findOrFail(Auth::guard('users')->id());
+
+        if (!$loginUser->can('adminUser')) {
+            return to_route('user.users.show', ['user' => $user->id])->with([
+                'message' => 'このアカウントではアクセスできません',
+                'status' => 'error',
+            ]);
+        }
+
+        if ($user->id === $loginUser->id) {
+            return to_route('user.users.show', ['user' => $user->id])->with([
+                'message' => '不正な操作がありました',
+                'status' => 'error',
+            ]);
+        }
+
+        $user->delete();
+
+        return to_route('user.users.index')->with([
+            'message' => '削除しました',
+            'status' => 'success',
+        ]);
     }
 }
