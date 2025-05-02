@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Staff;
+use App\Http\Requests\StoreStaffRequest;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use App\Jobs\SendStaffCreatedMail;
 
 class StaffManagementController extends Controller
 {
@@ -32,15 +36,41 @@ class StaffManagementController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::orderBy('kana')
+        ->select('id', 'name')
+        ->get();
+
+        return Inertia::render('User/Staff/Create', [
+            'users' => $users,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreStaffRequest $request)
     {
-        //
+        $userId = null;
+        if (!is_null($request->affiliation)) {
+            $userId = intval($request->affiliation);
+        }
+
+        $password = Str::random(8);
+
+        $staff = Staff::create([
+            'user_id' => $userId,
+            'name' => $request->name,
+            'kana' => $request->kana,
+            'email' => $request->email,
+            'password' => Hash::make($password),
+        ]);
+
+        SendStaffCreatedMail::dispatch($staff, $password);
+
+        return to_route('user.staff.index')->with([
+            'message' => '登録しました',
+            'status' => 'success',
+        ]);
     }
 
     /**
