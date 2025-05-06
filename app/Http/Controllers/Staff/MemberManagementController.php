@@ -76,9 +76,16 @@ class MemberManagementController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Member $member)
     {
-        //
+        $getMember = Member::leftjoin('users', 'users.id', '=', 'members.user_id')
+        ->where('members.id', $member->id)
+        ->select('members.id', 'members.name', 'members.kana', 'members.email', 'members.user_id', 'users.name as user_name')
+        ->first();
+
+        return Inertia::render('Staff/Member/Show', [
+            'member' => $getMember,
+        ]); 
     }
 
     /**
