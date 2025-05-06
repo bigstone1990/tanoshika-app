@@ -9,10 +9,12 @@ import { FormEventHandler } from 'react';
 export default function UpdateProfileInformation({
     mustVerifyEmail,
     status,
+    affiliation,
     className = '',
 }: {
     mustVerifyEmail: boolean;
     status?: string;
+    affiliation: string;
     className?: string;
 }) {
     const user = usePage().props.auth.user;
@@ -68,6 +70,12 @@ export default function UpdateProfileInformation({
                     />
 
                     <InputError className="mt-2" message={errors.email} />
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">所属事業所</label>
+
+                    <p className="mt-1 block w-full ">{affiliation}</p>
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (
