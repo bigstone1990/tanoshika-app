@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Member;
+use App\Http\Requests\StoreMemberRequest;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use App\Jobs\SendMemberCreatedMail;
 
 class MemberManagementController extends Controller
 {
@@ -32,15 +36,41 @@ class MemberManagementController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::orderBy('kana')
+        ->select('id', 'name')
+        ->get();
+
+        return Inertia::render('Staff/Member/Create', [
+            'users' => $users,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreMemberRequest $request)
     {
-        //
+        $userId = null;
+        if (!is_null($request->affiliation)) {
+            $userId = intval($request->affiliation);
+        }
+
+        $password = Str::random(8);
+
+        $member = Member::create([
+            'user_id' => $userId,
+            'name' => $request->name,
+            'kana' => $request->kana,
+            'email' => $request->email,
+            'password' => Hash::make($password),
+        ]);
+
+        SendMemberCreatedMail::dispatch($member, $password);
+
+        return to_route('staff.members.index')->with([
+            'message' => '登録しました',
+            'status' => 'success',
+        ]);
     }
 
     /**
