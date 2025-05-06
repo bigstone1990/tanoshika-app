@@ -4,6 +4,7 @@ export interface User {
     kana: string;
     email: string;
     email_verified_at?: string;
+    authority: number;
 }
 
 export type PageProps<

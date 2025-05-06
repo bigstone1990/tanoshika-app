@@ -70,6 +70,12 @@ export default function UpdateProfileInformation({
                     <InputError className="mt-2" message={errors.email} />
                 </div>
 
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">権限</label>
+
+                    <p className="mt-1 block w-full ">{user.authority === 1 ? '管理者' : user.authority === 9 ? '一般' : 'その他'}</p>
+                </div>
+
                 {mustVerifyEmail && user.email_verified_at === null && (
                     <div>
                         <p className="mt-2 text-sm text-gray-800">
