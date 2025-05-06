@@ -126,7 +126,7 @@ class StaffManagementController extends Controller
 
         $staff->save();
 
-        return to_route('user.staff.index')->with([
+        return to_route('user.staff.show', ['staff' => $staff->id])->with([
             'message' => '更新しました',
             'status' => 'success',
         ]);
