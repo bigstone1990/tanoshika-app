@@ -3,8 +3,9 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import SelectBox from '@/Components/SelectBox'
 import TextInput from '@/Components/TextInput';
+import Modal from '@/Components/Modal';
 import { Head, Link, useForm } from '@inertiajs/react';
-import { FormEventHandler } from 'react';
+import { FormEventHandler, useState } from 'react';
 
 type EditProps = {
     staff: {
@@ -21,16 +22,34 @@ type EditProps = {
 }
 
 export default function Edit({staff, users}: EditProps) {
+    const [confirmingDeletion, setConfirmingDeletion] = useState(false);
+
     const usersProps = users.map(user => ({
         label: user.name,
         value: String(user.id),
     }));
 
-    const { data, setData, put, errors } = useForm({
+    const { data, setData, put, delete: destroy, errors } = useForm({
         name: staff.name,
         kana: staff.kana,
         affiliation: String(staff.user_id),
     });
+
+    const confirmDeletion = () => {
+        setConfirmingDeletion(true);
+    };
+
+    const deleteItem: FormEventHandler = (e) => {
+        e.preventDefault();
+
+        destroy(route('user.staff.destroy', {staff: staff.id}), {
+            onFinish: () => closeModal(),
+        });
+    };
+
+    const closeModal = () => {
+        setConfirmingDeletion(false);
+    };
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -130,8 +149,30 @@ export default function Edit({staff, users}: EditProps) {
                                                 <div className="p-2 w-full flex gap-4 justify-center">
                                                     <Link as="button" href={route('user.staff.show', {staff: staff.id})} className="text-white bg-gray-500 border-0 py-2 px-8 hover:bg-gray-600 rounded">詳細に戻る</Link>
                                                     <button className="text-white bg-indigo-500 border-0 py-2 px-8 hover:bg-indigo-600 rounded">更新する</button>
+                                                    <button type="button" onClick={confirmDeletion} className="text-white bg-red-500 border-0 py-2 px-8 hover:bg-red-600 rounded">削除する</button>
                                                 </div>
                                             </form>
+                                            <Modal show={confirmingDeletion} onClose={closeModal}>
+                                                <form onSubmit={deleteItem} className="p-6">
+                                                    <h2 className="text-lg font-medium text-gray-900">
+                                                        このアカウントを本当に削除しますか？
+                                                    </h2>
+                                
+                                                    <p className="mt-1 text-sm text-gray-600">
+                                                        このアカウントに紐づいているデータが全て完全に削除されます。
+                                                    </p>
+                                
+                                                    <div className="mt-4 w-full flex gap-4 justify-center">
+                                                        <button type="button" onClick={closeModal} className="text-white bg-gray-500 border-0 py-2 px-8 hover:bg-gray-600 rounded">
+                                                            キャンセル
+                                                        </button>
+                                
+                                                        <button className="text-white bg-red-500 border-0 py-2 px-8 hover:bg-red-600 rounded">
+                                                            アカウントを削除する
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </Modal>
                                         </div>
                                     </div>
                                 </div>

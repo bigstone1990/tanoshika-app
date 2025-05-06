@@ -135,8 +135,13 @@ class StaffManagementController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Staff $staff)
     {
-        //
+        $staff->delete();
+
+        return to_route('user.staff.index')->with([
+            'message' => '削除しました',
+            'status' => 'success',
+        ]);
     }
 }
