@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Staff;
 use App\Http\Requests\StoreStaffRequest;
+use App\Http\Requests\UpdateStaffRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Jobs\SendStaffCreatedMail;
@@ -91,17 +92,44 @@ class StaffManagementController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Staff $staff)
     {
-        //
+        $users = User::orderBy('kana')
+        ->select('id', 'name')
+        ->get();
+
+        return Inertia::render('User/Staff/Edit', [
+            'staff' => [
+                'id' => $staff->id,
+                'user_id' => $staff->user_id,
+                'name' => $staff->name,
+                'kana' => $staff->kana,
+                'email' => $staff->email,
+            ],
+            'users' => $users,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateStaffRequest $request, Staff $staff)
     {
-        //
+        $userId = null;
+        if (!is_null($request->affiliation)) {
+            $userId = intval($request->affiliation);
+        }
+
+        $staff->user_id = $userId;
+        $staff->name = $request->name;
+        $staff->kana = $request->kana;
+
+        $staff->save();
+
+        return to_route('user.staff.index')->with([
+            'message' => '更新しました',
+            'status' => 'success',
+        ]);
     }
 
     /**
