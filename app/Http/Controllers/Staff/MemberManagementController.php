@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Member;
 use App\Http\Requests\StoreMemberRequest;
+use App\Http\Requests\UpdateMemberRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Jobs\SendMemberCreatedMail;
@@ -91,24 +92,56 @@ class MemberManagementController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Member $member)
     {
-        //
+        $users = User::orderBy('kana')
+        ->select('id', 'name')
+        ->get();
+
+        return Inertia::render('Staff/Member/Edit', [
+            'member' => [
+                'id' => $member->id,
+                'user_id' => $member->user_id,
+                'name' => $member->name,
+                'kana' => $member->kana,
+                'email' => $member->email,
+            ],
+            'users' => $users,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateMemberRequest $request, Member $member)
     {
-        //
+        $userId = null;
+        if (!is_null($request->affiliation)) {
+            $userId = intval($request->affiliation);
+        }
+
+        $member->user_id = $userId;
+        $member->name = $request->name;
+        $member->kana = $request->kana;
+
+        $member->save();
+
+        return to_route('staff.members.show', ['member' => $member->id])->with([
+            'message' => '更新しました',
+            'status' => 'success',
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Member $member)
     {
-        //
+        $member->delete();
+
+        return to_route('staff.members.index')->with([
+            'message' => '削除しました',
+            'status' => 'success',
+        ]);
     }
 }
