@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             StaffSeeder::class,
             MemberSeeder::class,
+            DailyReportSeeder::class,
         ]);
     }
 }

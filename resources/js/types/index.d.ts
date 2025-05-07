@@ -14,3 +14,5 @@ export type PageProps<
         user: User;
     };
 };
+
+export * from './paginate';
