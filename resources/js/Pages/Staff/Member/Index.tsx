@@ -16,7 +16,7 @@ type IndexProps = {
     user_id: number;
     user_name: string;
   }[];
-}
+};
 
 const StyledMemberTableContainer = styled.div`
   max-width: calc(6rem + 10rem + 15rem + 10rem + 1rem + 1px);

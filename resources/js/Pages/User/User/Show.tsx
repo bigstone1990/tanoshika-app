@@ -19,7 +19,7 @@ type ShowProps = {
         email: string;
         authority: number;
     };
-}
+};
 
 export default function Show({auth, flash, user}: ShowProps) {
 

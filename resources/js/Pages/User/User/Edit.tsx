@@ -30,7 +30,7 @@ type EditProps = {
         authority: number;
         isSelf: boolean;
     };
-}
+};
 
 export default function Edit({user}: EditProps) {
     const [confirmingDeletion, setConfirmingDeletion] = useState(false);

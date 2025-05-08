@@ -20,7 +20,7 @@ type IndexProps = {
     email: string;
     authority: number;
   }[];
-}
+};
 
 const StyledUserTableContainer = styled.div`
   max-width: calc(6rem + 10rem + 15rem + 6rem + 1rem + 1px);

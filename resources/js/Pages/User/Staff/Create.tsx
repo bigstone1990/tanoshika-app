@@ -11,7 +11,7 @@ type CreateProps = {
         id: number;
         name: string;
     }[];
-}
+};
 
 export default function Create({users}: CreateProps) {
     const usersProps = users.map(user => ({

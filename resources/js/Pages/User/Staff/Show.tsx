@@ -15,7 +15,7 @@ type ShowProps = {
         user_id: number;
         user_name: string;
     };
-}
+};
 
 export default function Show({flash, staff}: ShowProps) {
 

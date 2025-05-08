@@ -19,7 +19,7 @@ type EditProps = {
         id: number;
         name: string;
     }[];
-}
+};
 
 export default function Edit({staff, users}: EditProps) {
     const [confirmingDeletion, setConfirmingDeletion] = useState(false);

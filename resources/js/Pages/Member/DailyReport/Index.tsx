@@ -6,18 +6,18 @@ import { Paginate } from '@/types'
 import Pagination from '@/Components/Pagination'
 
 type Report = {
-  id: string
-  date: string
-  submitted_at: string | null
-}
+  id: string;
+  date: string;
+  submitted_at: string | null;
+};
 
 type IndexProps = {
   flash: {
-    status: string
-    message: string
-  }
-  reports: Paginate<Report>
-}
+    status: string;
+    message: string;
+  };
+  reports: Paginate<Report>;
+};
 
 const StyledMemberDailyReportTableContainer = styled.div`
   max-width: calc(6rem + 10rem + 10rem + 1rem + 1px);
@@ -78,7 +78,7 @@ const StyledMemberDailyReportTableContainer = styled.div`
       }
     }
   }
-`
+`;
 
 export default function Index({flash, reports}: IndexProps) {
   return (
