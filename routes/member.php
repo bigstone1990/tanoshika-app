@@ -15,9 +15,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth:members', 'verified'])->name('dashboard');
 
 Route::middleware('auth:members')->group(function () {
-    Route::get('/dailyreports', [DailyReportController::class, 'index'])->name('dailyreports.index');
-    Route::get('/dailyreports/create', [DailyReportController::class, 'create'])->name('dailyreports.create');
-    Route::get('/dailyreports/{date}', [DailyReportController::class, 'show'])->name('dailyreports.show');
+    Route::get('/daily-reports', [DailyReportController::class, 'index'])->name('dailyReports.index');
+    Route::get('/daily-reports/create', [DailyReportController::class, 'create'])->name('dailyReports.create');
+    Route::post('/daily-reports/validate-step/{step}', [DailyReportController::class, 'validateStep'])->name('dailyReports.validateStep');
+    Route::post('/daily-reports/initial-save', [DailyReportController::class, 'initialSave'])->name('dailyReports.initialSave');
+    Route::post('/daily-reports/initial-submit', [DailyReportController::class, 'initialSubmit'])->name('dailyReports.initialSubmit');
+    Route::get('/daily-reports/{date}', [DailyReportController::class, 'show'])->name('dailyReports.show');
 });
 
 Route::middleware('auth:members')->group(function () {

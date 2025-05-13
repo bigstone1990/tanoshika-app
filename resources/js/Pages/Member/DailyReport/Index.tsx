@@ -100,7 +100,7 @@ export default function Index({flash, reports}: IndexProps) {
                 <div className="container mx-auto">
                   <div className="w-full mx-auto overflow-auto">
                     <div className="flex gap-4 justify-end w-full mb-4">
-                      <Link as="button" href={route('member.dailyreports.create')} className="text-white bg-indigo-500 border-0 py-2 px-8 hover:bg-indigo-600 rounded">新規作成</Link>
+                      <Link as="button" href={route('member.dailyReports.create')} className="text-white bg-indigo-500 border-0 py-2 px-8 hover:bg-indigo-600 rounded">新規作成</Link>
                     </div>
                     <StyledMemberDailyReportTableContainer>
                       <table className="table-fixed w-full text-left whitespace-normal">
@@ -116,7 +116,7 @@ export default function Index({flash, reports}: IndexProps) {
                             reports.data.map(report => (
                               <tr key={ report.id }>
                                 <td className="border-b-2 px-4 py-3 bg-white">
-                                  <Link as="button" href={route('member.dailyreports.show', {date: report.date})} className="w-full text-white bg-sky-500 border-0 py-2 px-4 hover:bg-sky-600 rounded">詳細</Link>
+                                  <Link as="button" href={route('member.dailyReports.show', {date: report.date})} className="w-full text-white bg-sky-500 border-0 py-2 px-4 hover:bg-sky-600 rounded">詳細</Link>
                                 </td>
                                 <td className="border-b-2 px-4 py-3 bg-white">{report.date}</td>
                                 <td className="border-b-2 px-4 py-3 bg-white">

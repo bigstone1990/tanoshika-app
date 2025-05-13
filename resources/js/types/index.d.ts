@@ -16,3 +16,4 @@ export type PageProps<
 };
 
 export * from './paginate';
+export * from './dailyReport';

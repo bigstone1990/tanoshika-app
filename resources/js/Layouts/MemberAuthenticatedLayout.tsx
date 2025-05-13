@@ -34,8 +34,8 @@ export default function Authenticated({
                                     ダッシュボード
                                 </NavLink>
                                 <NavLink
-                                    href={route('member.dailyreports.index')}
-                                    active={route().current('member.dailyreports.index')}
+                                    href={route('member.dailyReports.index')}
+                                    active={route().current('member.dailyReports.index')}
                                 >
                                     日報管理
                                 </NavLink>
@@ -144,8 +144,8 @@ export default function Authenticated({
                             ダッシュボード
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
-                            href={route('member.dailyreports.index')}
-                            active={route().current('member.dailyreports.index')}
+                            href={route('member.dailyReports.index')}
+                            active={route().current('member.dailyReports.index')}
                         >
                             日報管理
                         </ResponsiveNavLink>
