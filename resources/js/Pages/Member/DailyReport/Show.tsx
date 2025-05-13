@@ -229,6 +229,13 @@ export default function Show({flash, report, startWorkType, endWorkType, scoreOp
                                                     <p className="rounded-md border-gray-300 shadow-sm mt-1 block w-full bg-gray-100 bg-opacity-50 border text-base text-gray-700 py-1 px-3 leading-8">{report.physicalConditionScore ? Object.values(scoreOption).find(option => option.value === String(report.physicalConditionScore))?.label : '未入力'}</p>
                                                 </div>
                                             </div>
+                                            <div className="p-2 w-full">
+                                                <div className="relative">
+                                                    <p className="block text-sm font-medium text-gray-700 leading-7">ステータス</p>
+
+                                                    <p className="rounded-md border-gray-300 shadow-sm mt-1 block w-full bg-gray-100 bg-opacity-50 border text-base text-gray-700 py-1 px-3 leading-8">{report.submittedAt ? '提出済み' : '作成中'}</p>
+                                                </div>
+                                            </div>
                                             <div className="p-2 w-full flex gap-4 justify-center">
                                                 <Link as="button" href={route('member.dailyReports.index')} className="text-white bg-gray-500 border-0 py-2 px-8 hover:bg-gray-600 rounded">一覧に戻る</Link>
                                                 <Link as="button" href={route('member.dailyReports.edit', {date: report.date})} className="text-white bg-indigo-500 border-0 py-2 px-8 hover:bg-indigo-600 rounded">編集する</Link>
