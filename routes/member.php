@@ -22,6 +22,9 @@ Route::middleware('auth:members')->group(function () {
     Route::post('/daily-reports/initial-submit', [DailyReportController::class, 'initialSubmit'])->name('dailyReports.initialSubmit');
     Route::get('/daily-reports/{date}', [DailyReportController::class, 'show'])->name('dailyReports.show');
     Route::get('/daily-reports/{date}/edit', [DailyReportController::class, 'edit'])->name('dailyReports.edit');
+    Route::post('/daily-reports/repeat-validate-step/{date}/{step}', [DailyReportController::class, 'repeatValidateStep'])->name('dailyReports.repeatValidateStep');
+    Route::put('/daily-reports/repeat-save/{date}', [DailyReportController::class, 'repeatSave'])->name('dailyReports.repeatSave');
+    Route::put('/daily-reports/repeat-submit/{date}', [DailyReportController::class, 'repeatSubmit'])->name('dailyReports.repeatSubmit');
 });
 
 Route::middleware('auth:members')->group(function () {
