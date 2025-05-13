@@ -307,4 +307,23 @@ class DailyReportController extends Controller
         ]);
     }
 
+    public function destroy(string $date)
+    {
+        $memberId = Auth::guard('members')->id();
+
+        $dateFormat = Carbon::parse($date)->format('Y-m-d');
+
+        $report = DailyReport::where('member_id', $memberId)->where('date', $dateFormat)->first();
+
+        if (is_null($report)) {
+            abort(404);
+        }
+
+        $report->delete();
+
+        return to_route('member.dailyReports.index')->with([
+            'message' => '削除しました',
+            'status' => 'success',
+        ]);
+    }
 }

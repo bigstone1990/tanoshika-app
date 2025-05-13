@@ -25,6 +25,7 @@ Route::middleware('auth:members')->group(function () {
     Route::post('/daily-reports/repeat-validate-step/{date}/{step}', [DailyReportController::class, 'repeatValidateStep'])->name('dailyReports.repeatValidateStep');
     Route::put('/daily-reports/repeat-save/{date}', [DailyReportController::class, 'repeatSave'])->name('dailyReports.repeatSave');
     Route::put('/daily-reports/repeat-submit/{date}', [DailyReportController::class, 'repeatSubmit'])->name('dailyReports.repeatSubmit');
+    Route::delete('/daily-reports/{date}', [DailyReportController::class, 'destroy'])->name('dailyReports.destroy');
 });
 
 Route::middleware('auth:members')->group(function () {

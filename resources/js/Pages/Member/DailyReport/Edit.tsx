@@ -2,7 +2,8 @@ import AuthenticatedLayout from '@/Layouts/MemberAuthenticatedLayout';
 import RepeatStep1 from './RepeatStep1';
 import RepeatStep2 from './RepeatStep2';
 import { Head, useForm } from '@inertiajs/react';
-import { useState } from 'react';
+import { useState, FormEventHandler } from 'react';
+import Modal from '@/Components/Modal';
 import { DailyReportStartWorkType, DailyReportEndWorkType, DailyReportScoreOption } from '@/types'
 
 type EditProps = {
@@ -45,7 +46,9 @@ export default function Edit({report, startWorkType, endWorkType, scoreOption}: 
     const totalSteps = 2;
     const [step, setStep] = useState(1);
     
-    const { data, setData, post, put, errors } = useForm({
+    const [confirmingDeletion, setConfirmingDeletion] = useState(false);
+
+    const { data, setData, post, put, delete: destroy, errors } = useForm({
         startWorkType: report.startWorkType ? String(report.startWorkType) : '',
         endWorkType: report.endWorkType ? String(report.endWorkType) : '',
         attendanceMemo: report.attendanceMemo ? report.attendanceMemo : '',
@@ -94,6 +97,22 @@ export default function Edit({report, startWorkType, endWorkType, scoreOption}: 
 
     const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
 
+    const confirmDeletion = () => {
+        setConfirmingDeletion(true);
+    };
+
+    const deleteItem: FormEventHandler = (e) => {
+        e.preventDefault();
+
+        destroy(route('member.dailyReports.destroy', {date: report.date}), {
+            onFinish: () => closeModal(),
+        });
+    };
+
+    const closeModal = () => {
+        setConfirmingDeletion(false);
+    };
+
     return (
         <AuthenticatedLayout
             header={
@@ -121,6 +140,7 @@ export default function Edit({report, startWorkType, endWorkType, scoreOption}: 
                                                         errors={errors}
                                                         nextStep={nextStep}
                                                         handleSave={handleSave}
+                                                        confirmDeletion={confirmDeletion}
                                                         startWorkType={startWorkType}
                                                         endWorkType={endWorkType}
                                                     />
@@ -133,11 +153,33 @@ export default function Edit({report, startWorkType, endWorkType, scoreOption}: 
                                                         errors={errors}
                                                         prevStep={prevStep}
                                                         handleSave={handleSave}
+                                                        confirmDeletion={confirmDeletion}
                                                         handleSubmit={handleSubmit}
                                                         scoreOption={scoreOption}
                                                     />
                                                 )}
                                             </form>
+                                            <Modal show={confirmingDeletion} onClose={closeModal}>
+                                                <form onSubmit={deleteItem} className="p-6">
+                                                    <h2 className="text-lg font-medium text-gray-900">
+                                                        本当に削除しますか？
+                                                    </h2>
+                                
+                                                    <p className="mt-1 text-sm text-gray-600">
+                                                        削除後データを復元することはできません。
+                                                    </p>
+                                
+                                                    <div className="mt-4 w-full flex gap-4 justify-center">
+                                                        <button type="button" onClick={closeModal} className="text-white bg-gray-500 border-0 py-2 px-8 hover:bg-gray-600 rounded">
+                                                            キャンセル
+                                                        </button>
+                                
+                                                        <button className="text-white bg-red-500 border-0 py-2 px-8 hover:bg-red-600 rounded">
+                                                            削除する
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </Modal>
                                         </div>
                                     </div>
                                 </div>

@@ -15,6 +15,7 @@ type RepeatStep1Props = {
   errors: Partial<Record<keyof RepeatStep1Props['data'], string>>;
   nextStep: () => void;
   handleSave: () => void;
+  confirmDeletion: () => void;
   startWorkType: DailyReportStartWorkType;
   endWorkType: DailyReportEndWorkType;
 };
@@ -33,7 +34,7 @@ const StyledDailyReportWorkType = styled.div`
   }
 `;
 
-export default function RepeatStep1({date, data, setData, errors, nextStep, handleSave, startWorkType, endWorkType}: RepeatStep1Props) {
+export default function RepeatStep1({date, data, setData, errors, nextStep, handleSave, confirmDeletion, startWorkType, endWorkType}: RepeatStep1Props) {
   return (
     <>
       <div className="text-lg font-semibold leading-tight text-gray-800">出勤退勤について</div>
@@ -93,6 +94,7 @@ export default function RepeatStep1({date, data, setData, errors, nextStep, hand
       <div className="p-2 w-full flex gap-4 justify-center">
         <button type="button" onClick={() => handleSave()} className="text-white bg-indigo-500 border-0 py-2 px-8 hover:bg-indigo-600 rounded">一時保存する</button>
         <button type="button" onClick={() => nextStep()} className="text-white bg-indigo-500 border-0 py-2 px-8 hover:bg-indigo-600 rounded">次のページへ</button>
+        <button type="button" onClick={() => confirmDeletion()} className="text-white bg-red-500 border-0 py-2 px-8 hover:bg-red-600 rounded">削除する</button>
       </div>
       <div className="p-2 w-full flex gap-4 justify-center">
         <Link as="button" href={route('member.dailyReports.show', {date: date})} className="text-white bg-gray-500 border-0 py-2 px-8 hover:bg-gray-600 rounded">詳細に戻る</Link>
