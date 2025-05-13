@@ -4,13 +4,12 @@ import { useEffect } from 'react';
 
 type FlashMessageProps = {
   flash: {
-    status: string;
-    message: string;
+    status: string | null;
+    message: string | null;
   };
-}
+};
 
 export default function FlashMessage({flash}: FlashMessageProps) {
-
   useEffect(() => {
     toastr.options = {
       "closeButton": false,
@@ -33,10 +32,10 @@ export default function FlashMessage({flash}: FlashMessageProps) {
 
   useEffect(() => {
     requestAnimationFrame(() => {
-      if (flash.status === 'success') {
+      if (flash.status === 'success' && flash.message) {
         toastr.success(flash.message);
       }
-      else if (flash.status === 'error') {
+      else if (flash.status === 'error' && flash.message) {
         toastr.error(flash.message);
       }
     });

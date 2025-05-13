@@ -21,6 +21,7 @@ Route::middleware('auth:members')->group(function () {
     Route::post('/daily-reports/initial-save', [DailyReportController::class, 'initialSave'])->name('dailyReports.initialSave');
     Route::post('/daily-reports/initial-submit', [DailyReportController::class, 'initialSubmit'])->name('dailyReports.initialSubmit');
     Route::get('/daily-reports/{date}', [DailyReportController::class, 'show'])->name('dailyReports.show');
+    Route::get('/daily-reports/{date}/edit', [DailyReportController::class, 'edit'])->name('dailyReports.edit');
 });
 
 Route::middleware('auth:members')->group(function () {

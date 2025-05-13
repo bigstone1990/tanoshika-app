@@ -8,7 +8,7 @@ import { DailyReportStartWorkType, DailyReportEndWorkType, DailyReportScoreOptio
 type CreateProps = {
     startWorkType: DailyReportStartWorkType;
     endWorkType: DailyReportEndWorkType;
-    scoreOption: DailyReportScoreOption
+    scoreOption: DailyReportScoreOption;
 };
 
 type FormDataType = {
