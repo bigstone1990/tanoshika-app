@@ -245,10 +245,13 @@ export default function Edit({member, report, startWorkType, endWorkType, scoreO
                         </div>
                       </div>
                       <form onSubmit={submit}>
+                        <h3 className="text-xl font-semibold leading-tight text-gray-800">
+                          スタッフ入力欄
+                        </h3>
                         <div className="p-2 w-full">
                           <div className="relative">
                             <InputLabel htmlFor="staffMemo" className="leading-7 text-sm text-gray-600">
-                              スタッフメモ
+                              スタッフメモ <span className="text-red-600">*メンバーには表示されません</span>
                             </InputLabel>
                   
                             <TextArea

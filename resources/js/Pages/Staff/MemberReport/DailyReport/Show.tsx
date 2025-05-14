@@ -230,9 +230,12 @@ export default function Show({flash, member, report, startWorkType, endWorkType,
                           <p className="rounded-md border-gray-300 shadow-sm mt-1 block w-full bg-gray-100 bg-opacity-50 border text-base text-gray-700 py-1 px-3 leading-8">{report.submittedAt}</p>
                         </div>
                       </div>
+                      <h3 className="text-xl font-semibold leading-tight text-gray-800">
+                        スタッフ入力欄
+                      </h3>
                       <div className="p-2 w-full">
                         <div className="relative">
-                          <p className="block text-sm font-medium text-gray-700 leading-7">スタッフメモ最終更新者</p>
+                          <p className="block text-sm font-medium text-gray-700 leading-7">最終更新スタッフ</p>
 
                           <p className="rounded-md border-gray-300 shadow-sm mt-1 block w-full bg-gray-100 bg-opacity-50 border text-base text-gray-700 py-1 px-3 leading-8">{report.staffName ? report.staffName : ''}</p>
                         </div>
