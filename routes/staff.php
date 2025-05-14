@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\Staff\ProfileController;
 use App\Http\Controllers\Staff\MemberManagementController;
+use App\Http\Controllers\Staff\MemberReportController;
+use App\Http\Controllers\Staff\MemberDailyReportController;
+use App\Http\Controllers\Staff\MemberWeeklyReportController;
+use App\Http\Controllers\Staff\MemberMonthlyReportController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,6 +20,22 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth:staff')->group(function () {
     Route::resource('members', MemberManagementController::class);
+});
+
+Route::middleware('auth:staff')->group(function () {
+    Route::get('/member-reports', [MemberReportController::class, 'index'])->name('memberReports.index');
+});
+
+Route::middleware('auth:staff')->group(function () {
+    Route::get('/member-reports/{member}/daily-reports', [MemberDailyReportController::class, 'index'])->name('memberDailyReports.index');
+});
+
+Route::middleware('auth:staff')->group(function () {
+    Route::get('/member-reports/{member}/weekly-reports', [MemberWeeklyReportController::class, 'index'])->name('memberWeeklyReports.index');
+});
+
+Route::middleware('auth:staff')->group(function () {
+    Route::get('/member-reports/{member}/monthly-reports', [MemberMonthlyReportController::class, 'index'])->name('memberMonthlyReports.index');
 });
 
 Route::middleware('auth:staff')->group(function () {
