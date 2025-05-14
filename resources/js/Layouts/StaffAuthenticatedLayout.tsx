@@ -39,6 +39,12 @@ export default function Authenticated({
                                 >
                                     メンバー管理
                                 </NavLink>
+                                <NavLink
+                                    href={route('staff.memberReports.index')}
+                                    active={route().current('staff.memberReports.index')}
+                                >
+                                    報告書管理
+                                </NavLink>
                             </div>
                         </div>
 
@@ -148,6 +154,12 @@ export default function Authenticated({
                             active={route().current('staff.members.index')}
                         >
                             メンバー管理
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route('staff.memberReports.index')}
+                            active={route().current('staff.memberReports.index')}
+                        >
+                            報告書管理
                         </ResponsiveNavLink>
                     </div>
 
