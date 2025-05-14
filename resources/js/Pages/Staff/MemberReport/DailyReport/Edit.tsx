@@ -1,4 +1,4 @@
-import AuthenticatedLayout from '@/Layouts/MemberAuthenticatedLayout';
+import AuthenticatedLayout from '@/Layouts/StaffAuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { Fragment, FormEventHandler } from 'react'
 import { DailyReportStartWorkType, DailyReportEndWorkType, DailyReportScoreOption } from '@/types'

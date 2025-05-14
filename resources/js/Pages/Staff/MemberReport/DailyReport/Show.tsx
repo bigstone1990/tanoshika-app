@@ -1,4 +1,4 @@
-import AuthenticatedLayout from '@/Layouts/MemberAuthenticatedLayout';
+import AuthenticatedLayout from '@/Layouts/StaffAuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import FlashMessage from '@/Components/FlashMessage';
 import { Fragment } from 'react'
