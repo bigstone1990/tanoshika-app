@@ -29,6 +29,7 @@ Route::middleware('auth:staff')->group(function () {
 Route::middleware('auth:staff')->group(function () {
     Route::get('/member-reports/{member}/daily-reports', [MemberDailyReportController::class, 'index'])->name('memberDailyReports.index');
     Route::get('/member-reports/{member}/daily-reports/{date}', [MemberDailyReportController::class, 'show'])->name('memberDailyReports.show');
+    Route::get('/member-reports/{member}/daily-reports/{date}/edit', [MemberDailyReportController::class, 'edit'])->name('memberDailyReports.edit');
 });
 
 Route::middleware('auth:staff')->group(function () {
