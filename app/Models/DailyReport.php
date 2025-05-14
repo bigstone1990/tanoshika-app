@@ -25,6 +25,7 @@ class DailyReport extends Model
         'mental_condition_score',
         'physical_condition_score',
         'submitted_at',
+        'staff_name',
         'staff_memo',
     ];
 }

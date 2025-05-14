@@ -28,6 +28,7 @@ return new class extends Migration
             $table->tinyInteger('mental_condition_score')->nullable();
             $table->tinyInteger('physical_condition_score')->nullable();
             $table->dateTime('submitted_at', precision: 0)->nullable();
+            $table->string('staff_name')->nullable();
             $table->text('staff_memo')->nullable();
             $table->softDeletes();
             $table->timestamps();
